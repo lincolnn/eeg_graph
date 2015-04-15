@@ -1,11 +1,15 @@
 .theta {
-    fill: #fff;
+    fill: #F5ACE1;
 }
 
 .delta {
-    /*...*/
+    fill: #F77C7C;
 }
 
 .alpha {
-    /*...*/
+    fill: #93B7FA;
+}
+
+#content {
+    padding: 25px 55px;
 }
