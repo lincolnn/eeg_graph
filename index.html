@@ -7,12 +7,14 @@ text {
 }
 
 </style>
+<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+
 <body>
   <div id="content">
     <h1>Sensoree EEG Graph</h1>
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-12">
         <h3>Tune In</h3>
         <div id="bubble1"></div>
       </div>
@@ -39,8 +41,8 @@ text {
     </div>
 
   </div>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
+<script type="text/javascript" src="bower_components/d3/d3.min.js"></script>
 <script>
 
 var diameter = 960;
@@ -49,43 +51,52 @@ var svg = d3.select('#bubble1').append('svg')
   .attr('width', diameter)
   .attr('height', diameter);
 
+var svg2 = d3.select('#bubble2').append('svg')
+  .attr('width', diameter)
+  .attr('height', diameter)
+
+
 var bubble = d3.layout.pack()
   .size([diameter, diameter])
   .padding(3)
   .value(function(d) {return d.size;})
 
 d3.json("data/data.json", function(error, data) {
-  // console.log(data)
   var nodes = bubble.nodes(processData(data))
     .filter(function(d) { return !d.children; }); // filter out the outer bubble
+  // console.log(nodes)
 
-    console.log(nodes)
   var vis = svg.selectAll('circle')
-    .data(nodes, function(d) { return d.name; });
+    .data(nodes, function(d, i) { return i; });
+
 
   vis.enter().append('circle')
-    .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; })
+    .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')';})
     .attr('r', function(d) { return d.r; })
-    .attr('class', function(d) { return d.className; });
+    .attr('class', function(d) { return d.className; }); // class name not appending
 
 });
 
 
 function processData(data) {
   // { "name": 1, "children": [{"name": theta, "size": 0.45}, {"name": theta, "size": 0.45} ]}
+
   var obj = data.mentalState;
   var childrenArr = [];
 
   for(var prop in obj) {
     var newArr = [];
+
     for(var item in obj[prop]) {
       newArr.push({name: item, size: obj[prop][item], className: item.toLowerCase()})
     }
+
     childrenArr.push({name: prop, children: newArr})
   }
 
   return {children: childrenArr};
 }
+
 
 d3.select(self.frameElement).style("height", diameter + "px");
 
