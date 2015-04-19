@@ -1,4 +1,4 @@
-var diameter = 660;
+var diameter = 560;
 
 d3.json("data/data.json", function(error, data) {
 
@@ -25,8 +25,8 @@ d3.json("data/data.json", function(error, data) {
       .data(nodes, function(d, i) { return i; });
 
     vis.enter().append('circle')
-      .attr('transform', function(d) { return 'translate(' + d.x/3 + ',' + d.y/2.2 + ')';})
-      .attr('r', function(d) { return d.r/2.0; })
+      .attr('transform', function(d) { return 'translate(' + d.x/2 + ',' + d.y/2.0 + ')';})
+      .attr('r', function(d) { return d.r/1.75; })
       .attr('class', function(d) { return d.className; });
 
   });
