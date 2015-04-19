@@ -1,15 +1,31 @@
 .theta {
     fill: #F5ACE1;
+    opacity: 0.8;
 }
 
 .delta {
     fill: #F77C7C;
+    opacity: 0.8;
 }
 
 .alpha {
     fill: #93B7FA;
+    opacity: 0.8;
+}
+
+.beta {
+    fill: #AFFAED;
+    opacity: 0.8;
+}
+
+.gamma {
+    fill: #FCFCA2;
+    opacity: 0.8;
 }
 
 #content {
-    padding: 25px 55px;
+    margin-top: 255px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
 }

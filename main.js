@@ -1,25 +1,22 @@
-var diameter = 960;
-
-// var svg = d3.select('#content').append('svg')
-//   .attr('width', diameter)
-//   .attr('height', diameter);
-
-var bubble = d3.layout.pack()
-  .size([diameter, diameter])
-  .padding(3)
-  .value(function(d) {return d.size;})
+var diameter = 660;
 
 d3.json("data/data.json", function(error, data) {
+
+  var bubble = d3.layout.pack()
+    .size([diameter, diameter])
+    .padding(3)
+    .value(function(d) {return d.size;})
+
   var bubArr = processData(data);
 
   _.map(bubArr.children, function(d,i) {
 
-    var session = d3.select('body').append('div')
-      .attr('class', 'col-md-3')
+    var session = d3.select('#content').append('div')
+      .attr('class', 'col-md-2')
 
     var svg = session.append('svg')
-      .attr('width', 300)
-      .attr('height', 300)
+      .attr('width', 400)
+      .attr('height', 600)
 
     var nodes = bubble.nodes(d)
       .filter(function(d) { return !d.children; })
@@ -28,24 +25,11 @@ d3.json("data/data.json", function(error, data) {
       .data(nodes, function(d, i) { return i; });
 
     vis.enter().append('circle')
-      .attr('transform', function(d) { return 'translate(' + d.x/3 + ',' + d.y/3 + ')';})
-      .attr('r', function(d) { return d.r/4; })
+      .attr('transform', function(d) { return 'translate(' + d.x/3 + ',' + d.y/2.2 + ')';})
+      .attr('r', function(d) { return d.r/2.0; })
       .attr('class', function(d) { return d.className; });
 
   });
-
-  // var nodes = bubble.nodes(bubArr)
-  //   .filter(function(d) { return !d.children; }); // filter out the outer bubble
-
-  // var vis = svg.selectAll('circle')
-  //   .data(nodes, function(d, i) { return i; });
-
-  // vis.enter().append('circle')
-  //   .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')';})
-  //   .attr('r', function(d) { return d.r; })
-  //   .attr('class', function(d) { return d.className; }); // class name not appending
-
-
 });
 
 
