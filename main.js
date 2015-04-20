@@ -15,11 +15,11 @@ d3.json("data/data.json", function(error, data) {
   _.map(bubArr.children, function(d,i) {
 
     var session = d3.select('#content').append('div')
-      .attr('class', 'col-md-2')
+      .attr('class', 'box')
 
     var svg = session.append('svg')
-      .attr('width', 500)
-      .attr('height', 600)
+      .attr('width', 350)
+      .attr('height', 500)
 
     var nodes = bubble.nodes(d)
       .filter(function(d) { return !d.children; })
@@ -30,7 +30,7 @@ d3.json("data/data.json", function(error, data) {
     vis.enter().append('circle')
       .attr('transform', function(d) { return 'translate(' + d.x/2 + ',' + d.y/2.0 + ')';})
       .attr('r', function(d) { return d.r/1.75; })
-      .attr('class', function(d) { return d.className; });
+      .attr('class', function(d) { return d.className; })
 
   });
 });

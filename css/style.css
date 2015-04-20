@@ -30,8 +30,12 @@
 
 #content {
     margin-top: 255px;
-    margin-left: 75px;
+    margin-left: 55px;
     /*margin-right: auto;*/
     /*width: 85%;*/
+}
 
+.box {
+    /*width: 25%;*/
+    display: inline;
 }
