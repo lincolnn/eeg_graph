@@ -6,6 +6,9 @@ d3.json("data/data.json", function(error, data) {
     .size([diameter, diameter])
     .padding(3)
     .value(function(d) {return d.size;})
+    .sort(function(a,b) {
+      return a.name - b.name;
+    })
 
   var bubArr = processData(data);
 
@@ -15,7 +18,7 @@ d3.json("data/data.json", function(error, data) {
       .attr('class', 'col-md-2')
 
     var svg = session.append('svg')
-      .attr('width', 400)
+      .attr('width', 500)
       .attr('height', 600)
 
     var nodes = bubble.nodes(d)

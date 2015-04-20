@@ -1,23 +1,28 @@
+/*pink*/
 .theta {
     fill: #F5ACE1;
     opacity: 0.8;
 }
 
+/*red*/
 .delta {
     fill: #F77C7C;
     opacity: 0.8;
 }
 
+/*blue*/
 .alpha {
     fill: #93B7FA;
     opacity: 0.8;
 }
 
+/*teal*/
 .beta {
     fill: #AFFAED;
     opacity: 0.8;
 }
 
+/*yellow*/
 .gamma {
     fill: #FCFCA2;
     opacity: 0.8;
@@ -25,7 +30,8 @@
 
 #content {
     margin-top: 255px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 85%;
+    margin-left: 75px;
+    /*margin-right: auto;*/
+    /*width: 85%;*/
+
 }
