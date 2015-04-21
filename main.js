@@ -1,13 +1,22 @@
 var diameter = 560;
 
-d3.json("data/data.json", function(error, data) {
+d3.json("data/data1.json", function(error, data) {
+
+  var dataScale = d3.scale.linear()
+    .domain([0,1])
+    .range([0,125]);
 
   var bubble = d3.layout.pack()
     .size([diameter, diameter])
     .padding(3)
-    .value(function(d) {return d.size;})
+    .value(function(d) {
+      return d.size;
+    })
     .sort(function(a,b) {
       return a.name - b.name;
+    })
+    .radius(function(d) {
+      return dataScale(d)
     })
 
   var bubArr = processData(data);
@@ -22,14 +31,22 @@ d3.json("data/data.json", function(error, data) {
       .attr('height', 500)
 
     var nodes = bubble.nodes(d)
-      .filter(function(d) { return !d.children; })
+      .filter(function(d) { // filter out parent
+        console.log(d)
+        return !d.children; })
+
+    // console.log(nodes)
 
     var vis = svg.selectAll('circle')
-      .data(nodes, function(d, i) { return i; });
+      .data(nodes, function(d, i) {
+        // console.log(d)
+        return i; });
 
     vis.enter().append('circle')
       .attr('transform', function(d) { return 'translate(' + d.x/2 + ',' + d.y/2.0 + ')';})
-      .attr('r', function(d) { return d.r/1.75; })
+      .attr('r', function(d) {
+        // console.log(d.r)
+        return d.r/1.75; })
       .attr('class', function(d) { return d.className; })
 
   });
@@ -54,5 +71,6 @@ function processData(data) {
 
   return {children: childrenArr};
 }
+
 
 d3.select(self.frameElement).style("height", diameter + "px");
