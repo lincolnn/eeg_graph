@@ -4,7 +4,7 @@ d3.json("data/data1.json", function(error, data) {
 
   var dataScale = d3.scale.linear()
     .domain([0,1])
-    .range([0,125]);
+    .range([20,125]);
 
   var bubble = d3.layout.pack()
     .size([diameter, diameter])
